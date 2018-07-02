@@ -1,7 +1,3 @@
-// Chnges the title.
-var titulo = document.querySelector(".titulo");
-titulo.textContent = "Aparecida Nutricionista";
-
 var pacientes = document.querySelectorAll(".paciente");
 
 for(var i=0; i < pacientes.length; i++){
@@ -23,7 +19,7 @@ for(var i=0; i < pacientes.length; i++){
 }
 
 function calculaIMC(peso, altura){
-  return (peso / (altura * altura)).toFixed(2);
+  return imc = (peso / (altura * altura)).toFixed(2);
 }
 
 // // Função anônima.

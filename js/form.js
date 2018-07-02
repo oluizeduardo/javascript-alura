@@ -11,6 +11,7 @@ botaoAdicionar.addEventListener("click", function(event) {
   var pacienteTR = montaTR(paciente);
   adicionaNaTabela(pacienteTR);
 
+  //Limpa os campos do formulário.
   form.reset();
 });
 
@@ -20,7 +21,7 @@ function obtemDadosDoFormulario(form){
     peso: form.peso.value,
     altura: form.altura.value,
     gordura: form.gordura.value,
-    imc: calculaIMC(peso, altura)
+    imc: calculaIMC(form.peso.value, form.altura.value)
   }
   return paciente;
 }
@@ -30,25 +31,22 @@ function montaTR(paciente){
   var pacienteTR = document.createElement("tr");
   pacienteTR.classList.add("paciente");
 
-  var nomeTD = document.createElement("td");
-  var pesoTD = document.createElement("td");
-  var alturaTD = document.createElement("td");
-  var gorduraTD = document.createElement("td");
-  var icmTD = document.createElement("td");
-
-  nomeTD.textContent = paciente.nome;
-  pesoTD.textContent = paciente.peso;
-  alturaTD.textContent = paciente.altura;
-  gorduraTD.textContent = paciente.gordura;
-  icmTD.textContent = calculaIMC(paciente.peso, paciente.altura);
-
-  pacienteTR.appendChild(nomeTD);
-  pacienteTR.appendChild(pesoTD);
-  pacienteTR.appendChild(alturaTD);
-  pacienteTR.appendChild(gorduraTD);
-  pacienteTR.appendChild(icmTD);
+  pacienteTR.appendChild(montaTD(paciente.nome,"info-nome"));
+  pacienteTR.appendChild(montaTD(paciente.peso,"info-peso"));
+  pacienteTR.appendChild(montaTD(paciente.altura,"info-altura"));
+  pacienteTR.appendChild(montaTD(paciente.gordura,"info-gordura"));
+  pacienteTR.appendChild(montaTD(paciente.imc,"info-imc"));
 
   return pacienteTR;
+}
+
+// Cria uma nova TD.
+function montaTD(dado, classe){
+  var td = document.createElement("td");
+  td.textContent = dado;
+  td.classList.add(classe);
+
+  return td;
 }
 
 // Adiciona uma linha (tr) na tabela.
