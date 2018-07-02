@@ -8,11 +8,15 @@ botaoAdicionar.addEventListener("click", function(event) {
   var form = document.querySelector("#form-adiciona");
 
   var paciente = obtemDadosDoFormulario(form);
-  var pacienteTR = montaTR(paciente);
-  adicionaNaTabela(pacienteTR);
 
-  //Limpa os campos do formulário.
-  form.reset();
+  if(validaPaciente(paciente)){
+    var pacienteTR = montaTR(paciente);
+    adicionaNaTabela(pacienteTR);
+    //Limpa os campos do formulário.
+    form.reset();
+  }else{
+    alert("Alguns valores inseridos são inválidos!");
+  }
 });
 
 function obtemDadosDoFormulario(form){
@@ -24,6 +28,26 @@ function obtemDadosDoFormulario(form){
     imc: calculaIMC(form.peso.value, form.altura.value)
   }
   return paciente;
+}
+
+function validaPaciente(paciente){
+  if(validaPeso(paciente.peso) && validaAltura(paciente.altura)){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+function validaPeso(peso){
+  if(peso < 0.0 || peso > 1000)
+    return false
+  return true;
+}
+
+function validaAltura(altura){
+  if(altura < 0 || altura > 3)
+    return false
+  return true;
 }
 
 // Monta uma linha para ser adicionada na tabela.
