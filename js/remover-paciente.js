@@ -7,6 +7,11 @@ tabela.addEventListener("dblclick", function(event){
     var alvoEvento = event.target;
     // Traz o pai do alvo clicad. (TR)
     var paiDoAlvo = alvoEvento.parentNode;
-    // Remove o pai do alvo clicado.
-    paiDoAlvo.remove();
+
+    paiDoAlvo.classList.add("fade-out");
+
+    setTimeout(function(){
+      // Remove o pai do alvo clicado.
+      paiDoAlvo.remove();
+    }, 200);
 });
