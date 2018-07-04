@@ -6,12 +6,11 @@ botaoAdicionar.addEventListener("click", function(event) {
   event.preventDefault();
 
   var form = document.querySelector("#form-adiciona");
-
+  // Carrega os dados do novo paciente.
   var paciente = obtemDadosDoFormulario(form);
-
+  // Valida se os campos estão preenchidos. Valida peso e altura.
   if(validaPaciente(paciente)){
-    var pacienteTR = montaTR(paciente);
-    adicionaNaTabela(pacienteTR);
+    adicionaPacienteNaTabela(paciente);
     //Limpa os campos do formulário.
     form.reset();
   }else{
@@ -19,6 +18,7 @@ botaoAdicionar.addEventListener("click", function(event) {
   }
 });
 
+// Carrega os dados do novo paciente.
 function obtemDadosDoFormulario(form){
   var paciente = {
     nome: form.nome.value,
@@ -31,6 +31,9 @@ function obtemDadosDoFormulario(form){
 }
 
 function validaPaciente(paciente){
+  if(!paciente.nome || !paciente.peso || !paciente.altura || !paciente.gordura){
+    return false;
+  }
   if(validaPeso(paciente.peso) && validaAltura(paciente.altura)){
     return true;
   }else{
@@ -73,7 +76,7 @@ function montaTD(dado, classe){
   return td;
 }
 
-// Adiciona uma linha (tr) na tabela.
-function adicionaNaTabela(tr){
+function adicionaPacienteNaTabela(paciente){
+  var tr = montaTR(paciente);
   var tabela = document.querySelector("#tabela-pacientes").appendChild(tr);
 }
